@@ -1,0 +1,260 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2018-08-10",
+    "endpointPrefix": "AGCODService",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "serviceAbbreviation": "agcod",
+    "serviceFullName": "Amazon AGCOD",
+    "serviceId": "agcod",
+    "signatureVersion": "v4",
+    "targetPrefix": "com.amazonaws.agcod.AGCODService",
+    "uid": "agcod-2018-08-10"
+  },
+  "operations": {
+    "CreateGiftCard": {
+      "name": "CreateGiftCard",
+      "http": {
+        "method": "POST",
+        "requestUri": "/CreateGiftCard"
+      },
+      "input": {
+        "shape": "CreateGiftCardInput"
+      },
+      "output": {
+        "shape": "GiftCardResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        { "shape": "SystemError" },
+        { "shape": "PartnerInputError" },
+        { "shape": "PartnerAccessError" },
+        { "shape": "ResendError" },
+        { "shape": "UnknownError" }
+      ],
+      "documentation": "<p>The <code>CreateGiftCard</code> does something</p>"
+    }
+  },
+  "shapes": {
+    "CreateGiftCardInput": {
+      "type": "structure",
+      "required": [
+        "creationRequestId"
+      ],
+      "members": {
+        "creationRequestId": {
+          "shape": "String",
+          "documentation": "<p>Docu goes here</p>"
+        },
+        "partnerId": {
+          "shape": "String"
+        },
+        "value": {
+          "shape": "AgcodValue"
+        }
+      },
+      "documentation": "<p>Represents the input of a <code>CreateGiftCard</code> operation.</p>"
+    },
+    "AgcodValue": {
+      "type": "structure",
+      "members": {
+        "amount": {
+          "shape": "Amount"
+        },
+        "currencyCode": {
+          "shape": "CurrencyCode"
+        }
+      }
+    },
+    "Amount": {
+      "type": "integer",
+      "max": 2000,
+      "min": 1
+    },
+    "CurrencyCode": {
+      "type": "string",
+      "enum": [
+        "USD",
+        "EUR",
+        "GBP",
+        "JPY",
+        "CNY",
+        "CAD"
+      ]
+    },
+    "GiftCardResponse": {
+      "type": "structure",
+      "members": {
+        "cardNumber": {
+          "shape": "String",
+          "documentation": "<p>Docu goes here.</p>"
+        },
+        "cardStatus": {
+          "shape": "String",
+          "documentation": "<p>Docu goes here.</p>"
+        },
+        "expirationDate": {
+          "shape": "String",
+          "documentation": "<p>Docu goes here.</p>"
+        },
+        "value": {
+          "shape": "AgcodValue",
+          "documentation": "<p>Docu goes here.</p>"
+        },
+        "creationRequestId": {
+          "shape": "String",
+          "documentation": "<p>Docu goes here.</p>"
+        },
+        "gcClaimCode": {
+          "shape": "String",
+          "documentation": "<p>Docu goes here.</p>"
+        },
+        "gcExpirationDate": {
+          "shape": "String",
+          "documentation": "<p>Docu goes here.</p>"
+        },
+        "gcId": {
+          "shape": "String",
+          "documentation": "<p>Docu goes here.</p>"
+        },
+        "status": {
+          "shape": "Status",
+          "documentation": "<p>Docu goes here.</p>"
+        }
+      },
+      "documentation": "<p>Represents the output of a <code>CreateGiftCard</code> operation.</p>"
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "FAILURE",
+        "RESEND"
+      ]
+    },
+    "InternalServerError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "shape": "String",
+          "documentation": "<p>The server encountered an internal error trying to fulfill the request.</p>"
+        }
+      },
+      "documentation": "<p>An error occurred on the server side.</p>",
+      "error": {
+        "httpStatusCode": 500
+      },
+      "exception": true,
+      "fault": true
+    },
+    "SystemError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "shape": "String"
+        },
+        "errorCode": { "shape":  "String" },
+        "errorType": { "shape":  "String" },
+        "agcodResponse": { "shape":  "GiftCardResponse" }
+      },
+      "documentation": "<p>F100: System Errors</p>",
+      "error": {
+        "httpStatusCode": 400,
+        "code": "F100"
+      },
+      "exception": true
+    },
+    "PartnerInputError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "shape": "String"
+        },
+        "errorCode": { "shape":  "String" },
+        "errorType": { "shape":  "String" },
+        "agcodResponse": { "shape":  "GiftCardResponse" }
+      },
+      "documentation": "<p>F200: Partner Input Errors</p>",
+      "error": {
+        "httpStatusCode": 400,
+        "code": "F200",
+        "senderFault": true
+      },
+      "exception": true
+    },
+    "PartnerAccessError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "shape": "String"
+        },
+        "errorCode": { "shape":  "String" },
+        "errorType": { "shape":  "String" },
+        "agcodResponse": { "shape":  "GiftCardResponse" }
+      },
+      "documentation": "<p>F300: Partner Account/Access/Onboarding Errors</p>",
+      "error": {
+        "httpStatusCode": 400,
+        "code": "F300"
+      },
+      "exception": true
+    },
+    "ResendError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "shape": "String"
+        },
+        "errorCode": { "shape":  "String" },
+        "errorType": { "shape":  "String" },
+        "agcodResponse": { "shape":  "GiftCardResponse" }
+      },
+      "documentation": "<p>F400: RESEND Errors</p>",
+      "error": {
+        "httpStatusCode": 400,
+        "code": "F400"
+      },
+      "exception": true
+    },
+    "UnknownError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "shape": "String"
+        },
+        "errorCode": { "shape":  "String" },
+        "errorType": { "shape":  "String" },
+        "agcodResponse": { "shape":  "GiftCardResponse" }
+      },
+      "documentation": "<p>F500: Unknown Errors</p>",
+      "error": {
+        "httpStatusCode": 400,
+        "code": "F500"
+      },
+      "exception": true
+    },
+    "PositiveInteger": {
+      "type": "integer",
+      "min": 1
+    },
+    "PositiveLong": {
+      "type": "long",
+      "min": 1
+    },
+    "String": {
+      "type": "string"
+    },
+    "Date": {
+      "type": "timestamp"
+    },
+    "Double": {
+      "type": "double"
+    },
+    "Integer": {
+      "type": "integer"
+    }
+  }
+}
