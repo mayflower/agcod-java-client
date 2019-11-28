@@ -9,6 +9,7 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.agcod.internal.AcceptJsonInterceptor;
 import software.amazon.awssdk.services.agcod.model.*;
 
+import java.math.BigDecimal;
 import java.net.URI;
 
 import static org.junit.Assert.*;
@@ -31,7 +32,7 @@ public class AgcodClientTest {
                 .creationRequestId("F0000")
                 .partnerId(_partnerId)
                 .value(AgcodValue.builder()
-                        .amount(10)
+                        .amount(new BigDecimal(0.01))
                         .currencyCode(CurrencyCode.EUR)
                         .build())
                 .build());
@@ -44,12 +45,21 @@ public class AgcodClientTest {
             CreateGiftCardResponse response = _client.createGiftCard(CreateGiftCardRequest.builder()
                     .creationRequestId("F4000")
                     .partnerId(_partnerId)
-                    //.partnerId("Test123")
                     .value(AgcodValue.builder()
-                            .amount(10)
+                            .amount(new BigDecimal(10))
                             .currencyCode(CurrencyCode.EUR)
                             .build())
                     .build());
+    }
+
+    @Test
+    public void cancelGiftCardRequestTest() {
+        CancelGiftCardResponse response = _client.cancelGiftCard(CancelGiftCardRequest.builder()
+                .creationRequestId("F0000")
+                .partnerId(_partnerId)
+                .build());
+
+        assertEquals(response.status(), Status.SUCCESS);
     }
 
     private void initClient() {

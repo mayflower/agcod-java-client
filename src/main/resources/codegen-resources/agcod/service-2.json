@@ -35,7 +35,31 @@
         { "shape": "ResendError" },
         { "shape": "UnknownError" }
       ],
-      "documentation": "<p>The <code>CreateGiftCard</code> does something</p>"
+      "documentation": "<p>The <code>CreateGiftCard</code> requests creates a Amazon Gift Card</p>"
+    },
+    "CancelGiftCard": {
+      "name": "CancelGiftCard",
+      "http": {
+        "method": "POST",
+        "requestUri": "/CancelGiftCard"
+      },
+      "input": {
+        "shape": "CancelGiftCardInput"
+      },
+      "output": {
+        "shape": "CancelGiftCardResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        { "shape": "SystemError" },
+        { "shape": "PartnerInputError" },
+        { "shape": "PartnerAccessError" },
+        { "shape": "ResendError" },
+        { "shape": "UnknownError" }
+      ],
+      "documentation": "<p>The <code>CancelGiftCard</code> request cancels the Gift Card. This operation can only be executed within 15 minutes of the creation request time stamp</p>"
     }
   },
   "shapes": {
@@ -47,16 +71,34 @@
       "members": {
         "creationRequestId": {
           "shape": "String",
-          "documentation": "<p>Docu goes here</p>"
+          "documentation": "<p>A unique identifier for every CreateGiftCard call that results in the creation of a GC. The partner must generate a new value for every Create request (except for retries) To keep this as the globally unique transaction identifier, the partner needs to: <ul><li>Generate an alphanumeric value that is unique within the partner’s systems. ID may have a maximum of 19 alphanumeric characters</li><li>Creation Request ID must begin with the partnerID.</li></ul> </p>"
         },
         "partnerId": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>A unique identifier (CASE SENSITIVE, 1st letter is capitalized and the next four are lower case) provided by the Amazon GC team. This value is part of the Payload of every AGCOD Gateway request.</p>"
         },
         "value": {
           "shape": "AgcodValue"
         }
       },
       "documentation": "<p>Represents the input of a <code>CreateGiftCard</code> operation.</p>"
+    },
+    "CancelGiftCardInput": {
+      "type": "structure",
+      "required": [
+        "creationRequestId", "partnerId"
+      ],
+      "members": {
+        "creationRequestId": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for every CreateGiftCard call that results in the creation of a GC. The partner must generate a new value for every Create request (except for retries) To keep this as the globally unique transaction identifier, the partner needs to: <ul><li>Generate an alphanumeric value that is unique within the partner’s systems. ID may have a maximum of 19 alphanumeric characters</li><li>Creation Request ID must begin with the partnerID.</li></ul> </p>"
+        },
+        "partnerId": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier (CASE SENSITIVE, 1st letter is capitalized and the next four are lower case) provided by the Amazon GC team. This value is part of the Payload of every AGCOD Gateway request.</p>"
+        }
+      },
+      "documentation": "<p>Represents the input of a <code>CancelGiftCard</code> operation.</p>"
     },
     "AgcodValue": {
       "type": "structure",
@@ -70,8 +112,8 @@
       }
     },
     "Amount": {
-      "type": "integer",
-      "max": 2000,
+      "type": "bigdecimal",
+      "max": 500000,
       "min": 1
     },
     "CurrencyCode": {
@@ -126,6 +168,20 @@
         }
       },
       "documentation": "<p>Represents the output of a <code>CreateGiftCard</code> operation.</p>"
+    },
+    "CancelGiftCardResponse": {
+      "type": "structure",
+      "members": {
+        "creationRequestId": {
+          "shape": "String",
+          "documentation": "<p>Docu goes here.</p>"
+        },
+        "status": {
+          "shape": "Status",
+          "documentation": "<p>Docu goes here.</p>"
+        }
+      },
+      "documentation": "<p></p>"
     },
     "Status": {
       "type": "string",
@@ -255,6 +311,9 @@
     },
     "Integer": {
       "type": "integer"
+    },
+    "BigDecimal": {
+      "type": "bigdecimal"
     }
   }
 }

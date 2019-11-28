@@ -45,13 +45,21 @@ AgcodClient client = AgcodClient.builder()
 
 #### Create Gift Card Request
 ```java
-CreateGiftCardResponse response = _client.createGiftCard(CreateGiftCardRequest.builder()
+CreateGiftCardResponse response = client.createGiftCard(CreateGiftCardRequest.builder()
         .creationRequestId("F0000")
         .partnerId("partnerId")
         .value(AgcodValue.builder()
-                .amount(10)
+                .amount(new BigDecimal(10))
                 .currencyCode(CurrencyCode.EUR)
                 .build())
+        .build());
+```
+
+#### Cancel Gift Card Request
+```java
+CancelGiftCardResponse response = client.cancelGiftCard(CancelGiftCardRequest.builder()
+        .creationRequestId("F0000")
+        .partnerId("partnerId")
         .build());
 ```
 
@@ -72,7 +80,7 @@ mvn clean install -pl :agcod -P quick --am
 ## To Do
 
 - [x] Create Gift Card
-- [ ] Cancel Gift Card
+- [x] Cancel Gift Card
 - [ ] Activate Gift Card
 - [ ] Deactivate Gift Card
 - [ ] Get Gift Card Activity Page
