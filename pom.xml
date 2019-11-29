@@ -4,12 +4,30 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.mayflower.agcod</groupId>
+    <groupId>de.mayflower.library</groupId>
     <artifactId>agcod-java-client</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>AGCOD Client SDK</name>
+    <description>The AGCOD (Amazon Gift Cards On Demand) SDK for Java is a client based on the official AWS SDK Java v2 for the Amazon Incentives API.</description>
+    <url>https://github.com/mayflower/agcod-java-client</url>
+    <scm>
+        <url>https://github.com/mayflower/agcod-java-client.git</url>
+    </scm>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <organization>Mayflower GmbH</organization>
+            <organizationUrl>https://www.mayflower.de</organizationUrl>
+        </developer>
+    </developers>
     <properties>
         <jre.version>1.8</jre.version>
-        <awsjavasdk.version>2.10.22</awsjavasdk.version>
+        <awsjavasdk.version>2.10.25</awsjavasdk.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <spotbugs.version>3.1.11</spotbugs.version>
         <junit.version>4.12</junit.version>

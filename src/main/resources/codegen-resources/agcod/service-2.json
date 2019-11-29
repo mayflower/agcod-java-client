@@ -50,9 +50,7 @@
         "shape": "CancelGiftCardResponse"
       },
       "errors": [
-        {
-          "shape": "InternalServerError"
-        },
+        { "shape": "InternalServerError" },
         { "shape": "SystemError" },
         { "shape": "PartnerInputError" },
         { "shape": "PartnerAccessError" },
@@ -60,6 +58,28 @@
         { "shape": "UnknownError" }
       ],
       "documentation": "<p>The <code>CancelGiftCard</code> request cancels the Gift Card. This operation can only be executed within 15 minutes of the creation request time stamp</p>"
+    },
+    "GetAvailableFunds": {
+      "name": "GetAvailableFunds",
+      "http": {
+        "method": "POST",
+        "requestUri": "/GetAvailableFunds"
+      },
+      "input": {
+        "shape": "GetAvailableFundsInput"
+      },
+      "output": {
+        "shape": "GetAvailableFundsResponse"
+      },
+      "errors": [
+        { "shape": "InternalServerError" },
+        { "shape": "SystemError" },
+        { "shape": "PartnerInputError" },
+        { "shape": "PartnerAccessError" },
+        { "shape": "ResendError" },
+        { "shape": "UnknownError" }
+      ],
+      "documentation": "<p>The <code>GetAvailableFunds</code> returns the amount of funds currently available in your Amazon Incentives account. It provides an alternative to logging into our portal for viewing available funds. A potential use-case of this operation is to develop a customized alerting system or checking the balance of an account periodically.</p>"
     }
   },
   "shapes": {
@@ -99,6 +119,19 @@
         }
       },
       "documentation": "<p>Represents the input of a <code>CancelGiftCard</code> operation.</p>"
+    },
+    "GetAvailableFundsInput": {
+      "type": "structure",
+      "required": [
+        "partnerId"
+      ],
+      "members": {
+        "partnerId": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier (CASE SENSITIVE, 1st letter is capitalized and the next four are lower case) provided by the Amazon GC team. This value is part of the Payload of every AGCOD Gateway request.</p>"
+        }
+      },
+      "documentation": "<p>Represents the input of a <code>GetAvailableFunds</code> operation.</p>"
     },
     "AgcodValue": {
       "type": "structure",
@@ -174,6 +207,24 @@
       "members": {
         "creationRequestId": {
           "shape": "String",
+          "documentation": "<p>Docu goes here.</p>"
+        },
+        "status": {
+          "shape": "Status",
+          "documentation": "<p>Docu goes here.</p>"
+        }
+      },
+      "documentation": "<p></p>"
+    },
+    "GetAvailableFundsResponse": {
+      "type": "structure",
+      "members": {
+        "availableFunds": {
+          "shape": "AgcodValue",
+          "documentation": "<p>Docu goes here.</p>"
+        },
+        "timestamp": {
+          "shape": "Date",
           "documentation": "<p>Docu goes here.</p>"
         },
         "status": {

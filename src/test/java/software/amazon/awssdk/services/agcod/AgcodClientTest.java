@@ -11,6 +11,7 @@ import software.amazon.awssdk.services.agcod.model.*;
 
 import java.math.BigDecimal;
 import java.net.URI;
+import java.time.Instant;
 
 import static org.junit.Assert.*;
 
@@ -60,6 +61,17 @@ public class AgcodClientTest {
                 .build());
 
         assertEquals(response.status(), Status.SUCCESS);
+    }
+
+    @Test
+    public void getAvailableFundsRequestTest() {
+        GetAvailableFundsResponse response = _client.getAvailableFunds(GetAvailableFundsRequest.builder()
+                .partnerId(_partnerId)
+                .build());
+
+        assertEquals(response.status(), Status.SUCCESS);
+        assertNotNull(response.availableFunds());
+        assertTrue(response.timestamp() instanceof Instant);
     }
 
     private void initClient() {

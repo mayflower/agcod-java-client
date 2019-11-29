@@ -63,6 +63,13 @@ CancelGiftCardResponse response = client.cancelGiftCard(CancelGiftCardRequest.bu
         .build());
 ```
 
+#### Get Available Funds Request
+```java
+GetAvailableFundsResponse response = client.getAvailableFunds(GetAvailableFundsRequest.builder()
+        .partnerId("partnerId")
+        .build());
+```
+
 ## Building From Source
 
 Once you check out the code from GitHub, you can build it using Maven.
