@@ -147,7 +147,7 @@
     "Amount": {
       "type": "bigdecimal",
       "max": 500000,
-      "min": 1
+      "min": 0.01
     },
     "CurrencyCode": {
       "type": "string",

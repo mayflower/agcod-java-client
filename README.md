@@ -24,8 +24,9 @@ The recommended way to use the AWS SDK for Java in your project is to consume it
 
 ```xml
 <dependency>
-  <groupId>de.mayflower.agcod</groupId>
-  <artifactId>agcod-java-client</artifactId>
+    <groupId>com.github.mayflower</groupId>
+    <artifactId>agcod-java-client</artifactId>
+    <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -70,27 +71,13 @@ GetAvailableFundsResponse response = client.getAvailableFunds(GetAvailableFundsR
         .build());
 ```
 
-## Building From Source
-
-Once you check out the code from GitHub, you can build it using Maven.
-
-```sh
-mvn clean install
-
-# Skip tests, checkstyles, findbugs, etc for quick build
-mvn clean install -P quick
-
-# Build the agcod service module
-mvn clean install -pl :agcod -P quick --am
-```
-
 ## To Do
 
 - [x] Create Gift Card
 - [x] Cancel Gift Card
+- [x] Get Available Funds
 - [ ] Activate Gift Card
 - [ ] Deactivate Gift Card
-- [ ] Get Gift Card Activity Page
 - [ ] Activation Status Check
 
 
