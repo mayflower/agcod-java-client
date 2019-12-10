@@ -33,7 +33,7 @@ public class AgcodClientTest {
 //                .creationRequestId("F0000")
 //                .partnerId(_partnerId)
 //                .value(AgcodValue.builder()
-//                        .amount(new BigDecimal(0.01))
+//                        .amount(0.01F)
 //                        .currencyCode(CurrencyCode.EUR)
 //                        .build())
 //                .build());
@@ -47,7 +47,7 @@ public class AgcodClientTest {
 //                    .creationRequestId("F4000")
 //                    .partnerId(_partnerId)
 //                    .value(AgcodValue.builder()
-//                            .amount(new BigDecimal(10))
+//                            .amount(10F)
 //                            .currencyCode(CurrencyCode.EUR)
 //                            .build())
 //                    .build());

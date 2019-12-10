@@ -48,7 +48,7 @@ CreateGiftCardResponse response = client.createGiftCard(CreateGiftCardRequest.bu
         .creationRequestId("F0000")
         .partnerId("partnerId")
         .value(AgcodValue.builder()
-                .amount(new BigDecimal(10))
+                .amount(10F)
                 .currencyCode(CurrencyCode.EUR)
                 .build())
         .build());
@@ -89,11 +89,8 @@ Since Amazon Incentives "does not fall under Amazon Web Services (AWS)" an integ
 - [x] Create Gift Card
 - [x] Cancel Gift Card
 - [x] Get Available Funds
-- [ ] Support for `Amazon Product Voucher Claim Code`
-- [ ] Parse dates in response as `Date` - not as `String` 
-- [ ] Activate Gift Card
-- [ ] Deactivate Gift Card
-- [ ] Activation Status Check
+- [ ] [Parse dates in response as `Date` - not as `String`](https://github.com/mayflower/agcod-java-client/issues/2) 
+- [ ] [Support for physical gift cards](https://github.com/mayflower/agcod-java-client/issues/1)
 
 
 [sdk]: https://github.com/aws/aws-sdk-java-v2

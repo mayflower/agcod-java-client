@@ -1,7 +1,7 @@
 {
   "version": "2.0",
   "metadata": {
-    "apiVersion": "2018-08-10",
+    "apiVersion": "2019-11-29",
     "endpointPrefix": "AGCODService",
     "jsonVersion": "1.1",
     "protocol": "json",
@@ -10,7 +10,7 @@
     "serviceId": "agcod",
     "signatureVersion": "v4",
     "targetPrefix": "com.amazonaws.agcod.AGCODService",
-    "uid": "agcod-2018-08-10"
+    "uid": "agcod-2019-11-29"
   },
   "operations": {
     "CreateGiftCard": {
@@ -86,12 +86,12 @@
     "CreateGiftCardInput": {
       "type": "structure",
       "required": [
-        "creationRequestId"
+        "creationRequestId, partnerId, value"
       ],
       "members": {
         "creationRequestId": {
           "shape": "String",
-          "documentation": "<p>A unique identifier for every CreateGiftCard call that results in the creation of a GC. The partner must generate a new value for every Create request (except for retries) To keep this as the globally unique transaction identifier, the partner needs to: <ul><li>Generate an alphanumeric value that is unique within the partner’s systems. ID may have a maximum of 19 alphanumeric characters</li><li>Creation Request ID must begin with the partnerID.</li></ul> </p>"
+          "documentation": "<p>A unique identifier for every CreateGiftCard call that results in the creation of a GC. The partner must generate a new value for every Create request (except for retries) To keep this as the globally unique transaction identifier, the partner needs to: <ul><li>Generate an alphanumeric value that is unique within your system. This ID can have up to 40 alphanumeric characters.</li><li>Begin the creationRequestId value with your partnerID.</li></ul> </p>"
         },
         "partnerId": {
           "shape": "String",
@@ -99,6 +99,18 @@
         },
         "value": {
           "shape": "AgcodValue"
+        },
+        "programId": {
+          "shape": "String",
+          "documentation": "<p>The programID is an approved identifier provided by Amazon through a submission process. The programID is alphanumeric and can be up to 100 characters in length.</p>"
+        },
+        "productType": {
+          "shape": "ProductType",
+          "documentation": "<p>The ProductType field is required for the creation of an Amazon Product Voucher Claim Code. Only authorized partners can create Product Vouchers. This attribute is alpha-numeric with a max length of 50 characters.</p>"
+        },
+        "externalReference": {
+          "shape": "String",
+          "documentation": "<p>You can use the externalReference field to pass your own reference identifier as a string when making gift code requests (up to 100 Unicode characters).</p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>CreateGiftCard</code> operation.</p>"
@@ -140,12 +152,13 @@
           "shape": "Amount"
         },
         "currencyCode": {
-          "shape": "CurrencyCode"
+          "shape": "CurrencyCode",
+          "documentation": "<p>USD for US, EUR for EU, JPY for JP, CAD for CA, AUD for AU, TRY for TR, AED for UAE</p>"
         }
       }
     },
     "Amount": {
-      "type": "bigdecimal",
+      "type": "float",
       "max": 500000,
       "min": 0.01
     },
@@ -157,7 +170,8 @@
         "GBP",
         "JPY",
         "CNY",
-        "CAD"
+        "CAD",
+        "AED"
       ]
     },
     "GiftCardResponse": {
@@ -240,6 +254,15 @@
         "SUCCESS",
         "FAILURE",
         "RESEND"
+      ]
+    },
+    "ProductType": {
+      "type": "string",
+      "enum": [
+        "bookPV",
+        "hwPV",
+        "ppePV",
+        "culturePV"
       ]
     },
     "InternalServerError": {
@@ -354,6 +377,10 @@
     "String": {
       "type": "string"
     },
+    "DateRfc822": {
+      "type": "timestamp",
+      "timestampFormat":"rfc822"
+    },
     "Date": {
       "type": "timestamp"
     },
@@ -362,9 +389,6 @@
     },
     "Integer": {
       "type": "integer"
-    },
-    "BigDecimal": {
-      "type": "bigdecimal"
     }
   }
 }
