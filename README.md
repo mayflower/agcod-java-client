@@ -16,21 +16,19 @@ You need credentials for the AGCOD API. Amazon provides a [scratchpad][scratchpa
 
 To run the SDK you will need **Java 1.8+**.
 
-## Using the SDK
+## Using the Client
 
-The recommended way to use the AWS SDK for Java in your project is to consume it from Maven. 
+The recommended way to use the AGCOD Client for Java in your project is to consume it from Maven. 
 
 #### Importing the BOM ####
 
-```xml
+```xml 
 <dependency>
     <groupId>com.github.mayflower</groupId>
     <artifactId>agcod-java-client</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
-
-## Using the Client
 
 #### Initialize the Client
 ```java
@@ -71,16 +69,34 @@ GetAvailableFundsResponse response = client.getAvailableFunds(GetAvailableFundsR
         .build());
 ```
 
+### Catching Errors
+
+The client will throw the following exceptions according to the documentation:
+
+| Amazon Error Code  | Java Exception | Comment | 
+| ------------- | ------------- | ------------- |
+| F100  | SystemErrorException  | System Errors  |
+| F2xx  | PartnerInputErrorException  | Partner Input Errors  |
+| F3xx  | PartnerAccessErrorException  | Partner Account/Access/Onboarding Errors  |
+| F400  | ResendErrorException  | System Temporarily Unavailable: The library will attempt automatic retries on this error up to 8 times with an exponential backoff strategy  |
+| F500  | UnknownErrorException  | Unknown Error  |
+
+## Note
+Since Amazon Incentives "does not fall under Amazon Web Services (AWS)" an integration into the official AWS SDK [is not desired][agcod-aws-issue].  
+
 ## To Do
 
 - [x] Create Gift Card
 - [x] Cancel Gift Card
 - [x] Get Available Funds
+- [ ] Support for `Amazon Product Voucher Claim Code`
+- [ ] Parse dates in response as `Date` - not as `String` 
 - [ ] Activate Gift Card
 - [ ] Deactivate Gift Card
 - [ ] Activation Status Check
 
 
 [sdk]: https://github.com/aws/aws-sdk-java-v2
-[agcod-docs]: https://developer.amazon.com/es/apps-and-games/incentives-api
+[agcod-docs]: https://s3-us-west-2.amazonaws.com/incentives-api-docs/incentives-api/incentives-api.html
 [scratchpad]: https://s3.amazonaws.com/AGCOD/htmlSDKv2/htmlSDKv2_NAEUFE/index.html
+[agcod-aws-issue]: https://github.com/aws/aws-sdk-java-v2/issues/1508
