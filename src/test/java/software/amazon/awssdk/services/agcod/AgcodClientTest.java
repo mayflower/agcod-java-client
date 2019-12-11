@@ -2,21 +2,13 @@
 package software.amazon.awssdk.services.agcod;
 
 import org.junit.Before;
-import org.junit.Test;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.agcod.internal.AcceptJsonInterceptor;
-import software.amazon.awssdk.services.agcod.model.*;
-
-import java.math.BigDecimal;
-import java.net.URI;
-import java.time.Instant;
-
-import static org.junit.Assert.*;
+import software.amazon.awssdk.services.agcod.internal.AgcodHost;
 
 public class AgcodClientTest {
-    private static final String _host = "https://agcod-v2-eu-gamma.amazon.com";
     private static final String _accessKey = "accessKey";
     private static final String _secretKey = "secretKey";
     private static final String _partnerId = "Abc123";
@@ -78,7 +70,7 @@ public class AgcodClientTest {
         _client = AgcodClient.builder()
                 .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(_accessKey, _secretKey)))
                 .region(Region.EU_WEST_1)
-                .endpointOverride(URI.create(_host))
+                .endpointOverride(AgcodHost.SANDBOX_EU.getUri())
                 .overrideConfiguration(o -> o
                         .addExecutionInterceptor(new AcceptJsonInterceptor())
                         .retryPolicy(AgcodRetryPolicy.defaultPolicy()))

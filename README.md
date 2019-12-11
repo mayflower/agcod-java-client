@@ -34,8 +34,8 @@ The recommended way to use the AGCOD Client for Java in your project is to consu
 ```java
 AgcodClient client = AgcodClient.builder()
                 .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create("accessKey", "secretKey")))
-                .region(Region.EU_WEST_1)
-                .endpointOverride(URI.create("https://agcod-v2-eu-gamma.amazon.com"))
+                .region(Region.US_EAST_1)
+                .endpointOverride(AgcodHost.SANDBOX_NORTH_AMERICA.getUri())
                 .overrideConfiguration(o -> o
                         .addExecutionInterceptor(new AcceptJsonInterceptor())
                         .retryPolicy(AgcodRetryPolicy.defaultPolicy()))
