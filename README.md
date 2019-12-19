@@ -37,8 +37,7 @@ AgcodClient client = AgcodClient.builder()
                 .region(Region.US_EAST_1)
                 .endpointOverride(AgcodHost.SANDBOX_NORTH_AMERICA.getUri())
                 .overrideConfiguration(o -> o
-                        .addExecutionInterceptor(new AcceptJsonInterceptor())
-                        .retryPolicy(AgcodRetryPolicy.defaultPolicy()))
+                        .addExecutionInterceptor(new AcceptJsonInterceptor()))
                 .build();
 ```
 

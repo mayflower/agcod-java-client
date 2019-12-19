@@ -210,7 +210,7 @@
           "documentation": "<p>Docu goes here.</p>"
         },
         "status": {
-          "shape": "Status",
+          "shape": "AgcodResponseStatus",
           "documentation": "<p>Docu goes here.</p>"
         }
       },
@@ -224,7 +224,7 @@
           "documentation": "<p>Docu goes here.</p>"
         },
         "status": {
-          "shape": "Status",
+          "shape": "AgcodResponseStatus",
           "documentation": "<p>Docu goes here.</p>"
         }
       },
@@ -242,13 +242,13 @@
           "documentation": "<p>Docu goes here.</p>"
         },
         "status": {
-          "shape": "Status",
+          "shape": "AgcodResponseStatus",
           "documentation": "<p>Docu goes here.</p>"
         }
       },
       "documentation": "<p></p>"
     },
-    "Status": {
+    "AgcodResponseStatus": {
       "type": "string",
       "enum": [
         "SUCCESS",
