@@ -26,7 +26,7 @@ The recommended way to use the AGCOD Client for Java in your project is to consu
 <dependency>
     <groupId>com.github.mayflower</groupId>
     <artifactId>agcod-java-client</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 </dependency>
 ```
 
