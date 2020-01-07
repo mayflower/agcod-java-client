@@ -1,4 +1,5 @@
 # AGCOD Client for Java (based on AWS SDK 2.0)
+[![Maven](https://img.shields.io/maven-central/v/com.github.mayflower/agcod-java-client?label=Maven)](https://search.maven.org/search?q=g:%22com.github.mayflower%22%20AND%20a%3A%22agcod-java-client%22)
 
 The **AGCOD (Amazon Gift Cards On Demand) SDK for Java** is a client based on the official [AWS SDK Java v2][sdk] for the Amazon Incentives API.
 

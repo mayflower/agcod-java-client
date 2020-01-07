@@ -38,6 +38,7 @@
         <slf4j.version>1.7.28</slf4j.version>
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+        <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
     </properties>
     <distributionManagement>
         <snapshotRepository>
@@ -74,17 +75,20 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.9.1</version>
                     <executions>
                         <execution>
-                            <id>attach-javadocs</id>
+                            <id>javadoc-jar</id>
+                            <phase>package</phase>
                             <goals>
                                 <goal>jar</goal>
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
+                        <failOnError>false</failOnError>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -136,20 +140,6 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-gpg-plugin</artifactId>
-                    <version>1.5</version>
-                    <executions>
-                        <execution>
-                            <id>sign-artifacts</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>sign</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${maven-jar-plugin.version}</version>
                 </plugin>
@@ -166,6 +156,29 @@
                         <goals>
                             <goal>jar-no-fork</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <keyname>matthias.strauss@mayflower.de</keyname>
+                            <passphraseServerId>gpg</passphraseServerId>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -204,6 +217,49 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>disable-java8-doclint</id>
+            <activation>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <properties>
+                <additionalparam>-Xdoclint:none</additionalparam>
+            </properties>
+        </profile>
+        <profile>
+            <id>public-javadoc</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${maven-javadoc-plugin.version}</version>
+                        <configuration>
+                            <minmemory>128m</minmemory>
+                            <maxmemory>8g</maxmemory>
+                            <includeDependencySources>false</includeDependencySources>
+                            <show>public</show>
+                            <author>false</author>
+                            <version>true</version>
+                            <use>false</use>
+                            <notree>true</notree>
+                            <nodeprecatedlist>true</nodeprecatedlist>
+                            <windowtitle>AWS SDK for Java - ${awsjavasdk.version}</windowtitle>
+                            <encoding>UTF-8</encoding>
+                            <docencoding>UTF-8</docencoding>
+                            <doctitle>AWS SDK for Java API Reference - ${awsjavasdk.version}</doctitle>
+                            <packagesheader>AWS SDK for Java</packagesheader>
+                            <excludePackageNames>:*.codegen:software.amazon.awssdk.services.protocol*
+                            </excludePackageNames>
+                            <bottom>
+                                <![CDATA[Copyright &#169; 2019 Amazon Web Services, Inc. All Rights Reserved.]]></bottom>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
     <dependencies>
         <dependency>
             <groupId>software.amazon.awssdk</groupId>

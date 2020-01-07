@@ -44,7 +44,7 @@ public final class AgcodRetryPolicy {
     /**
      * Default base sleep time for Agcod.
      **/
-    private static final Duration DEFAULT_BASE_DELAY = Duration.ofMillis(250);
+    private static final Duration DEFAULT_BASE_DELAY = Duration.ofMillis(100);
 
     /**
      * Default exeptions for retry for Agcod.
